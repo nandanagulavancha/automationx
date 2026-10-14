@@ -25,7 +25,7 @@
     --gold: #f6c453;
     --bg: #f6f7fb;
     --bg-2: #ffffff;
-    --card: rgba(255,255,255,0.78);
+    --card: rgba(255,255,255,0.88);
     --card-border: rgba(24,28,72,0.08);
     --ink: #14172e;
     --line: rgba(24,28,72,0.12);
@@ -54,7 +54,7 @@
   }
   :root[data-theme="dark"] {
     --bg: #070814; --bg-2: #0d1024; --text: #e4e6f7; --ink: #eef0ff; --muted: #9ba1c6; --cyan: #22d3ee;
-    --card: rgba(20,23,46,.72); --card-border: rgba(255,255,255,.08); --line: rgba(255,255,255,.14);
+    --card: rgba(20,23,46,.86); --card-border: rgba(255,255,255,.08); --line: rgba(255,255,255,.14);
     --shadow: 0 10px 30px -14px rgba(0,0,0,.75); --shadow-lg: 0 22px 44px -18px rgba(0,0,0,.85);
     --surface: #12152b; --surface-2: #171b34; --nav-bg: rgba(8,10,22,.78); --glass-strong: rgba(18,21,43,.92);
     --text-2: #c3c7e6; --stroke: rgba(255,255,255,.16); --stroke-2: rgba(255,255,255,.3); --subtle: rgba(255,255,255,.07);
@@ -71,7 +71,7 @@
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #070814; --bg-2: #0d1024; --text: #e4e6f7; --ink: #eef0ff; --muted: #9ba1c6; --cyan: #22d3ee;
-      --card: rgba(20,23,46,.72); --card-border: rgba(255,255,255,.08); --line: rgba(255,255,255,.14);
+      --card: rgba(20,23,46,.86); --card-border: rgba(255,255,255,.08); --line: rgba(255,255,255,.14);
       --shadow: 0 10px 30px -14px rgba(0,0,0,.75); --shadow-lg: 0 22px 44px -18px rgba(0,0,0,.85);
       --surface: #12152b; --surface-2: #171b34; --nav-bg: rgba(8,10,22,.78); --glass-strong: rgba(18,21,43,.92);
       --text-2: #c3c7e6; --stroke: rgba(255,255,255,.16); --stroke-2: rgba(255,255,255,.3); --subtle: rgba(255,255,255,.07);
@@ -107,10 +107,10 @@
   .container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
   /* ---------- Background FX ---------- */
-  #circuit { position: fixed; inset: 0; z-index: -2; pointer-events: none; }
+  #circuit { position: fixed; inset: 0; z-index: -2; pointer-events: none; contain: strict; }
   .glow-orb {
     position: fixed; border-radius: 50%; filter: blur(120px); z-index: -1; opacity: var(--orb-opacity); transition: opacity .6s;
-    animation: drift 18s ease-in-out infinite alternate; pointer-events: none;
+    animation: drift 18s ease-in-out infinite alternate; pointer-events: none; will-change: transform;
   }
   .orb-1 { width: 520px; height: 520px; background: var(--red); top: -160px; left: -140px; }
   .orb-2 { width: 600px; height: 600px; background: var(--violet); bottom: -220px; right: -180px; animation-delay: -6s; }
@@ -153,7 +153,7 @@
   .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .5px; }
   .brand-mark { width: 34px; height: 34px; }
   .brand span b { color: var(--red); }
-  .nav-links { display: flex; gap: 28px; font-size: 14px; font-weight: 500; color: var(--muted); }
+  .nav-links { display: flex; gap: 22px; font-size: 14px; font-weight: 500; color: var(--muted); }
   .nav-links a { position: relative; transition: color .3s; }
   .nav-links a::after {
     content: ''; position: absolute; left: 0; bottom: -6px; height: 2px; width: 0;
@@ -194,7 +194,7 @@
   }
   @keyframes shine { 0%,60% { left: -120%; } 100% { left: 160%; } }
   .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 40px -12px rgba(230,0,18,.85); }
-  .btn-ghost { background: var(--surface); border: 1px solid var(--line); color: var(--ink); box-shadow: var(--shadow); backdrop-filter: blur(8px); }
+  .btn-ghost { background: var(--surface); border: 1px solid var(--line); color: var(--ink); box-shadow: var(--shadow); }
   .btn-ghost:hover { transform: translateY(-3px); border-color: rgba(230,0,18,.4); color: var(--red); }
   .btn-sm { padding: 10px 20px; font-size: 13px; }
 
@@ -306,24 +306,12 @@
   .v4-stage { position: relative; width: 100%; max-width: 580px; aspect-ratio: 1; margin: 0 auto; cursor: pointer; }
   .v4-stage::before { content: ''; position: absolute; inset: 6%; border-radius: 50%; border: 1px dashed var(--stroke); animation: spin 60s linear infinite; }
   .v4-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .shape-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
-  .shape-chips button {
-    border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: 600 13px 'Plus Jakarta Sans', sans-serif;
-    padding: 8px 14px; border-radius: 999px; cursor: pointer; transition: .25s; position: relative; overflow: hidden;
-  }
-  .shape-chips button::after { content: ''; position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: linear-gradient(90deg, var(--red), var(--violet)); }
-  .shape-chips button.active { border-color: var(--red); color: var(--red); }
-  .shape-chips button.active::after { animation: chipTimer 4.5s linear forwards; }
-  @keyframes chipTimer { to { width: 100%; } }
   .v4-hint { position: absolute; left: 0; right: 0; bottom: -4px; text-align: center; font-size: 12px; color: var(--muted); }
 
   /* ---------- Variant responsive ---------- */
   @media (max-width: 980px) {
     .v4-grid { grid-template-columns: 1fr; }
     .v4-stage { max-width: 420px; order: -1; }
-  }
-  @media (max-width: 420px) {
-    .shape-chips button { padding: 7px 11px; font-size: 12px; }
   }
   .v4-grid > * { min-width: 0; }
 
@@ -348,7 +336,7 @@
 
   .card {
     background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius);
-    padding: 28px; position: relative; overflow: hidden; box-shadow: var(--shadow); backdrop-filter: blur(10px); transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .4s, background .4s;
+    padding: 28px; position: relative; overflow: hidden; box-shadow: var(--shadow); transition: transform .45s cubic-bezier(.2,.8,.2,1), border-color .4s, background .4s;
   }
   .card::before {
     content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
@@ -454,30 +442,12 @@
   /* Kit */
   .kit-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
   .card.kit { padding: 0; } .kit { transform-style: preserve-3d; display: flex; flex-direction: column; }
-  .kit-body { padding: 18px 20px 22px; }
-  .kit-media {
-    position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius) var(--radius) 0 0;
-    background: var(--media-grad); border-bottom: 1px solid var(--card-border);
-  }
-  .kit-media img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
-    transition: transform .8s cubic-bezier(.2,.8,.2,1), filter .6s; filter: saturate(.95);
-  }
-  .kit-media img.contain { object-fit: contain; padding: 10px; background: #fff; }
-  .kit:hover .kit-media img { transform: scale(1.08); filter: saturate(1.1); }
-  .kit-media::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,.55) 50%, transparent 65%);
-    transform: translateX(-120%); transition: transform 1s ease;
-  }
-  .kit:hover .kit-media::after { transform: translateX(120%); }
+  .kit-body { padding: 22px 22px 24px; }
   .kit-tag {
-    position: absolute; top: 10px; left: 10px; z-index: 1; font-size: 10px; font-weight: 800; letter-spacing: 1.2px;
-    text-transform: uppercase; padding: 4px 9px; border-radius: 6px; background: var(--glass-strong); color: var(--ink);
-    box-shadow: var(--shadow);
+    display: inline-block; margin-bottom: 16px; font-size: 10px; font-weight: 800; letter-spacing: 1.2px;
+    text-transform: uppercase; padding: 4px 9px; border-radius: 6px; background: var(--subtle); color: var(--ink);
   }
   .kit-tag.sw { background: var(--violet); color: #fff; }
-  .kit-credit { text-align: center; margin-top: 18px; font-size: 12px; color: var(--muted); }
   .kit .model { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 20px; margin-bottom: 4px; }
   .kit .type { font-size: 13px; color: var(--muted); }
   .kit .bar { height: 3px; width: 36px; border-radius: 2px; background: linear-gradient(90deg, var(--red), var(--violet)); margin-bottom: 12px; transition: width .5s; }
@@ -493,6 +463,95 @@
   .elig-list li:hover { transform: translateX(8px); border-color: rgba(230,0,18,.5); }
   .elig-list .num { color: #fff; width: 32px; height: 32px; border-radius: 9px; display: grid; place-items: center; background: var(--red); font-weight: 800; font-size: 14px; flex-shrink: 0; }
   .elig-grid h3 { font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 700; }
+
+  /* ATC */
+  .atc-intro { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: stretch; }
+  .atc-intro .card p + p { margin-top: 12px; }
+  .atc-intro .lead { color: var(--text-2); font-size: 16px; }
+  .atc-badge { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .atc-badge img { width: 150px; border-radius: 8px; background: #fff; }
+  .atc-photo { border-radius: var(--radius); overflow: hidden; position: relative; min-height: 280px; box-shadow: var(--shadow); }
+  .atc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px; }
+  .stat { text-align: center; padding: 22px 14px; }
+  .stat b { display: block; font-family: 'Outfit', sans-serif; font-weight: 800; font-size: clamp(26px, 3vw, 38px); line-height: 1.1; letter-spacing: -.5px; }
+  .stat span { font-size: 13px; color: var(--muted); }
+  .impact { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 28px; }
+  .tick-list { list-style: none; display: grid; gap: 10px; margin-top: 14px; }
+  .tick-list li { position: relative; padding-left: 26px; color: var(--text-2); font-size: 15px; }
+  .tick-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 12px; height: 12px; border-radius: 3px; background: linear-gradient(135deg, var(--red), var(--violet)); }
+  .sub-head { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 22px; margin: 56px 0 18px; color: var(--ink); }
+  .gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .gallery figure { position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 4 / 3; cursor: zoom-in; background: var(--surface-2); border: 1px solid var(--card-border); }
+  .gallery figure.wide { grid-column: span 2; aspect-ratio: 8 / 3; }
+  .gallery.g3 { grid-template-columns: repeat(3, 1fr); margin-top: 12px; }
+  .gallery.g3 figure { aspect-ratio: 16 / 9; }
+  .gallery figure.contain img { object-fit: contain; background: #fff; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+  .gallery figure:hover img { transform: scale(1.05); }
+  .gallery figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 12px 10px; font-size: 12px; font-weight: 600; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.72)); }
+  .partners { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+  /* Achievements */
+  .ach-stats { margin: 0 0 40px; }
+  .ach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .card.ach { padding: 0; display: flex; flex-direction: column; }
+  .ach-cover { position: relative; aspect-ratio: 16 / 10; overflow: hidden; cursor: zoom-in; border-bottom: 1px solid var(--card-border); background: var(--surface-2); }
+  .ach-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s cubic-bezier(.2,.8,.2,1); }
+  .ach:hover .ach-cover img { transform: scale(1.06); }
+  .ach-count { position: absolute; right: 10px; bottom: 10px; font-size: 11px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; }
+  .ach-award { position: absolute; left: 10px; top: 10px; font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; padding: 4px 9px; border-radius: 6px; background: var(--red); color: #fff; }
+  .ach-award.gold { background: var(--gold); color: #3a2400; }
+  .ach-award.bronze { background: #b37748; }
+  .ach-thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 6px; padding: 10px 12px 0; }
+  .ach-thumb { padding: 0; border: 1px solid var(--card-border); border-radius: 8px; overflow: hidden; aspect-ratio: 1; cursor: zoom-in; background: var(--surface-2); transition: border-color .25s, transform .25s; }
+  .ach-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .ach-thumb.letter img { object-fit: cover; object-position: top; background: #fff; }
+  .ach-thumb:hover, .ach-thumb:focus-visible { border-color: var(--red); transform: translateY(-2px); outline: none; }
+  .atc-badge .cvr-logo { width: 72px; background: none; }
+  .ach-body { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  .ach-when { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--red-2); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+  .ach h3 { font-size: 18px; line-height: 1.3; margin: 6px 0 8px; }
+  .ach .project { font-weight: 600; color: var(--text-2); font-size: 14px; margin-bottom: 8px; }
+  .ach p { font-size: 14px; }
+  .ach details { margin-top: auto; padding-top: 14px; font-size: 13px; color: var(--muted); }
+  .ach summary { cursor: pointer; font-weight: 700; color: var(--ink); list-style: none; display: inline-flex; align-items: center; gap: 6px; }
+  .ach summary::-webkit-details-marker { display: none; }
+  .ach summary::after { content: '+'; color: var(--red); font-size: 16px; line-height: 1; }
+  .ach details[open] summary::after { content: '–'; }
+  .ach details ul { list-style: none; margin-top: 8px; display: grid; gap: 3px; }
+  .ach details .mentor { margin-top: 8px; }
+
+  /* Industry training */
+  .train-head { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; align-items: stretch; }
+  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--card-border); background: var(--surface); box-shadow: var(--shadow); margin-top: 28px; }
+  .t-table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 620px; }
+  .t-table th, .t-table td { padding: 13px 16px; text-align: left; border-bottom: 1px solid var(--card-border); vertical-align: top; }
+  .t-table th { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); background: var(--surface-2); }
+  .t-table tr:last-child td { border-bottom: 0; }
+  .t-table td:first-child { color: var(--muted); font-weight: 700; width: 40px; }
+  .t-table td b { color: var(--ink); }
+  .lvl { display: inline-block; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
+  .lvl-1 { background: rgba(8,145,178,.12); color: var(--cyan); }
+  .lvl-2 { background: rgba(91,43,214,.12); color: var(--violet); }
+  .lvl-3 { background: rgba(230,0,18,.1); color: var(--red-text); }
+  :root[data-theme="dark"] .lvl-2 { color: #b9a2ff; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .lvl-2 { color: #b9a2ff; } }
+  .modules { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .modules .card { padding: 20px 22px; }
+  .modules h4 { font-size: 15px; margin: 8px 0 6px; }
+  .modules p { font-size: 13.5px; }
+
+  /* Lightbox */
+  .lb { position: fixed; inset: 0; z-index: 500; background: rgba(5,6,16,.92); display: none; align-items: center; justify-content: center; padding: 56px 16px 70px; }
+  .lb.open { display: flex; }
+  .lb img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 10px; box-shadow: 0 30px 80px rgba(0,0,0,.5); }
+  .lb-cap { position: absolute; left: 16px; right: 16px; bottom: 22px; text-align: center; color: #e4e6f7; font-size: 14px; }
+  .lb button { position: absolute; border: 0; cursor: pointer; width: 46px; height: 46px; border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; font-size: 22px; display: grid; place-items: center; }
+  .lb button:hover { background: var(--red); }
+  .lb-close { top: 14px; right: 14px; }
+  .lb-prev { left: 14px; top: 50%; margin-top: -23px; }
+  .lb-next { right: 14px; top: 50%; margin-top: -23px; }
 
   /* Venue & Contact */
   .venue {
@@ -566,8 +625,12 @@
     .kit-grid { grid-template-columns: 1fr 1fr; }
     .prizes { grid-template-columns: 1fr; }
     .prize.gold { order: -1; }
+    .atc-intro, .impact, .train-head { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .ach-grid, .modules { grid-template-columns: 1fr 1fr; }
+    .gallery { grid-template-columns: repeat(3, 1fr); }
   }
-  @media (max-width: 760px) {
+  @media (max-width: 1060px) {
     .nav-links {
       position: fixed; top: 0; right: 0; height: 100vh; width: 75%; max-width: 300px; flex-direction: column;
       padding: 100px 32px; gap: 26px; font-size: 18px; background: var(--surface); box-shadow: -20px 0 60px -10px rgba(0,0,0,.35), 0 0 0 100vmax rgba(10,12,30,0); transition: transform .45s cubic-bezier(.2,.8,.2,1), box-shadow .45s;
@@ -579,6 +642,8 @@
     .menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .menu-btn.open span:nth-child(2) { opacity: 0; }
     .menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+  @media (max-width: 760px) {
     .nav-cta { display: none; }
     .theme-label { display: none; }
     .theme-btn { width: 38px; padding: 0; justify-content: center; }
@@ -609,6 +674,13 @@
     section { padding: 80px 0; }
     .theme-banner, .venue-info { padding: 28px; }
     .chip.c2 { right: -2%; }
+    .ach-grid, .modules { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .gallery figure.wide { grid-column: 1 / -1; }
+    .gallery.g3 { grid-template-columns: 1fr; }
+    .stats { gap: 10px; } .stat { padding: 16px 8px; }
+    .sub-head { margin-top: 40px; font-size: 19px; }
+    .lb-prev, .lb-next { top: auto; bottom: 12px; margin: 0; }
   }
 
   @media (max-width: 380px) {
@@ -626,7 +698,6 @@
   }
   /* Tablets */
   @media (min-width: 761px) and (max-width: 980px) {
-    .nav-links { gap: 18px; font-size: 13px; }
     .about-grid > :last-child { grid-column: 1 / -1; }
     .prizes { grid-template-columns: repeat(2, 1fr); }
     .prize.gold { grid-column: 1 / -1; }
@@ -687,7 +758,9 @@
       <a href="#prizes">Prizes</a>
       <a href="#schedule">Schedule</a>
       <a href="#kit">FA Kit</a>
-      <a href="#eligibility">Eligibility</a>
+      <a href="#atc">ATC Lab</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#training">Training</a>
       <a href="#venue">Venue</a>
     </div>
     <div class="nav-actions">
@@ -715,9 +788,6 @@
       <div class="hero-cta">
         <a href="https://mitsubishielectric.in/fa/mecup/registration-form.php" target="_blank" rel="noopener" class="btn btn-primary">Register Free <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         <a href="#prizes" class="btn btn-ghost">View Prizes</a>
-      </div>
-      <div class="shape-chips" id="shapeChips">
-        <button data-s="0" class="active">✕ AutomationX</button><button data-s="1">⚙ Gear</button><button data-s="2">🦾 Robot</button><button data-s="3">🏭 Factory</button><button data-s="4">2027</button>
       </div>
     </div>
     <div class="v4-stage" id="v4Stage"><canvas id="morph" aria-label="Particles forming automation shapes"></canvas><span class="v4-hint">Move through the particles · tap to morph</span></div>
@@ -861,39 +931,30 @@
     </div>
     <div class="kit-grid">
       <div class="card kit tilt reveal">
-        <div class="kit-media"><span class="kit-tag">Hardware</span><img src="images/fx5u.png" alt="MELSEC iQ-F FX5U programmable logic controller" loading="lazy" decoding="async" /></div>
-        <div class="kit-body"><div class="bar"></div><div class="model">FX5U</div><div class="type">Programmable Logic Controller</div></div>
+        <div class="kit-body"><span class="kit-tag">Hardware</span><div class="bar"></div><div class="model">FX5U</div><div class="type">Programmable Logic Controller</div></div>
       </div>
       <div class="card kit tilt reveal" style="transition-delay:.08s">
-        <div class="kit-media"><span class="kit-tag">Hardware</span><img src="images/mxf100.png" alt="MELSEC MX Controller MXF100" loading="lazy" decoding="async" class="contain" /></div>
-        <div class="kit-body"><div class="bar"></div><div class="model">MXF100</div><div class="type">Programmable Automation Controller</div></div>
+        <div class="kit-body"><span class="kit-tag">Hardware</span><div class="bar"></div><div class="model">MXF100</div><div class="type">Programmable Automation Controller</div></div>
       </div>
       <div class="card kit tilt reveal" style="transition-delay:.16s">
-        <div class="kit-media"><span class="kit-tag">Hardware</span><img src="images/gs2107.png" alt="GOT SIMPLE GS2107 7-inch HMI touch panel" loading="lazy" decoding="async" /></div>
-        <div class="kit-body"><div class="bar"></div><div class="model">GS2107</div><div class="type">7" Human Machine Interface</div></div>
+        <div class="kit-body"><span class="kit-tag">Hardware</span><div class="bar"></div><div class="model">GS2107</div><div class="type">7" Human Machine Interface</div></div>
       </div>
       <div class="card kit tilt reveal" style="transition-delay:.24s">
-        <div class="kit-media"><span class="kit-tag">Hardware</span><img src="images/fr-e820.jpg" alt="FR-E800 series inverter" loading="lazy" decoding="async" /></div>
-        <div class="kit-body"><div class="bar"></div><div class="model">FR-E820</div><div class="type">Inverter / VFD</div></div>
+        <div class="kit-body"><span class="kit-tag">Hardware</span><div class="bar"></div><div class="model">FR-E820</div><div class="type">Inverter / VFD</div></div>
       </div>
       <div class="card kit tilt reveal">
-        <div class="kit-media"><span class="kit-tag">Hardware</span><img src="images/mr-jet.png" alt="MELSERVO-JET servo amplifiers and servo motors" loading="lazy" decoding="async" class="contain" /></div>
-        <div class="kit-body"><div class="bar"></div><div class="model">MR-JET-20G</div><div class="type">Servo Amplifier &amp; Motor</div></div>
+        <div class="kit-body"><span class="kit-tag">Hardware</span><div class="bar"></div><div class="model">MR-JET-20G</div><div class="type">Servo Amplifier &amp; Motor</div></div>
       </div>
       <div class="card kit tilt reveal" style="transition-delay:.08s">
-        <div class="kit-media"><span class="kit-tag">Hardware</span><img src="images/mcb.png" alt="Miniature circuit breakers" loading="lazy" decoding="async" /></div>
-        <div class="kit-body"><div class="bar"></div><div class="model">MCBs</div><div class="type">Circuit Protection</div></div>
+        <div class="kit-body"><span class="kit-tag">Hardware</span><div class="bar"></div><div class="model">MCBs</div><div class="type">Circuit Protection</div></div>
       </div>
       <div class="card kit tilt reveal" style="transition-delay:.16s">
-        <div class="kit-media"><span class="kit-tag sw">Software</span><img src="images/genesis64.webp" alt="GENESIS64 SCADA dashboards in use" loading="lazy" decoding="async" /></div>
-        <div class="kit-body"><div class="bar"></div><div class="model">Genesis 64</div><div class="type">SCADA · Educational Licence</div></div>
+        <div class="kit-body"><span class="kit-tag sw">Software</span><div class="bar"></div><div class="model">Genesis 64</div><div class="type">SCADA · Educational Licence</div></div>
       </div>
       <div class="card kit tilt reveal" style="transition-delay:.24s">
-        <div class="kit-media"><span class="kit-tag sw">Software</span><img src="images/gemini.jpg" alt="MELSOFT Gemini 3D factory simulation on a monitor" loading="lazy" decoding="async" /></div>
-        <div class="kit-body"><div class="bar"></div><div class="model">Gemini</div><div class="type">3D Simulation · Educational Licence</div></div>
+        <div class="kit-body"><span class="kit-tag sw">Software</span><div class="bar"></div><div class="model">Gemini</div><div class="type">3D Simulation · Educational Licence</div></div>
       </div>
     </div>
-    <p class="kit-credit reveal">Product images © Mitsubishi Electric Corporation · ICONICS</p>
     <div class="kit-note">
       <div class="card reveal left">
         <div class="icon-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
@@ -930,6 +991,261 @@
     </div>
   </div>
 </section>
+
+<!-- ================= ATC ================= -->
+<section id="atc">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Your Host</span>
+      <h2>Mitsubishi Electric FA <span class="grad">Authorised Training Center</span></h2>
+      <p>A decade-long, industry-integrated initiative at CVR College of Engineering dedicated to automation skill development, practical training and innovative product design.</p>
+    </div>
+
+    <div class="atc-intro">
+      <div class="card reveal left">
+        <div class="atc-badge"><img class="cvr-logo" src="images/atc/cvr-logo.png" alt="CVR College of Engineering logo" loading="lazy" decoding="async" /><img src="images/atc/atc-logo.jpg" alt="Mitsubishi Electric Factory Automation Authorised Training Center logo" loading="lazy" decoding="async" /></div>
+        <p class="lead">Established in <b>February 2015</b> in collaboration with Mitsubishi Electric India Pvt. Ltd., the Factory Automation Lab was built with <b>₹80 lakhs</b> of sponsored equipment to give students and industry professionals hands-on exposure to advanced industrial automation.</p>
+        <p>Recognised as a Mitsubishi Electric Authorised Training Center (ATC), the lab is <b>one of only 10 ATCs in India</b> — and the only one in Telangana and Andhra Pradesh — making CVR a hub for industrial automation training and industry–academia engagement.</p>
+      </div>
+      <figure class="atc-photo reveal right" data-cap="Mitsubishi Electric FA ATC lab, CVR College of Engineering"><img src="images/atc/lab.jpg" alt="Workstations inside the Mitsubishi Electric FA ATC lab" loading="lazy" decoding="async" /></figure>
+    </div>
+
+    <div class="stats">
+      <div class="card stat reveal"><b class="grad">60+</b><span>Industry-oriented training programs</span></div>
+      <div class="card stat reveal" style="transition-delay:.08s"><b class="grad">5,000+</b><span>Registrations across trainings</span></div>
+      <div class="card stat reveal" style="transition-delay:.16s"><b class="grad">3,000+</b><span>Participants trained</span></div>
+      <div class="card stat reveal" style="transition-delay:.24s"><b class="grad">₹80L</b><span>Industry-sponsored equipment</span></div>
+    </div>
+
+    <div class="impact">
+      <div class="card reveal left">
+        <h3>From Training to Industry-Ready Talent</h3>
+        <p>The lab has grown beyond a conventional academic laboratory into an industry-connected learning and innovation ecosystem — hands-on training, industrial exposure, internships, innovative project development and customised programs.</p>
+        <ul class="tick-list">
+          <li>Participants from industries, R&amp;D organisations and academic institutions</li>
+          <li>10-month specialised training delivered for Mahindra &amp; Mahindra Automotive, Zaheerabad</li>
+          <li>Customised programs delivered for multiple industries</li>
+        </ul>
+        <div class="partners">
+          <span class="pill">Mahindra &amp; Mahindra</span><span class="pill">SR Automations</span><span class="pill">TSDDCF</span><span class="pill">Aurobindo Pharma</span>
+        </div>
+      </div>
+      <div class="card reveal right">
+        <h3>Enabling Innovation &amp; Competitive Excellence</h3>
+        <p>A launchpad for student innovation and project-based learning, where theory becomes working automation solutions.</p>
+        <ul class="tick-list">
+          <li>3 Bronze Trophies at the Mitsubishi National Automation Competition</li>
+          <li>₹1.50 lakhs in cumulative cash awards at the Mitsubishi National Automation Competition</li>
+          <li>1st Prize + USD 1,000 at IEEE YESIST12, Tunisia</li>
+          <li>Certificate of Appreciation from Mitsubishi Electric India for ATC support in FY 2022-23 &amp; FY 2023-24</li>
+        </ul>
+        <p style="margin-top:14px"><b style="color:var(--ink)">The model:</b> industry-sponsored infrastructure → experiential learning → professional training → innovation → measurable outcomes.</p>
+      </div>
+    </div>
+
+    <h3 class="sub-head reveal">Lab &amp; Recognition</h3>
+    <div class="gallery" data-lb-group="atc">
+      <figure class="wide reveal" data-cap="Inauguration of the Mitsubishi FA ATC"><img src="images/atc/unveiling.jpg" alt="Officials unveiling the ATC plaque" loading="lazy" decoding="async" /><figcaption>ATC inauguration</figcaption></figure>
+      <figure class="reveal" data-cap="Ribbon cutting at the lab entrance"><img src="images/atc/inauguration.jpg" alt="Ribbon cutting at the lab entrance" loading="lazy" decoding="async" /><figcaption>Ribbon cutting</figcaption></figure>
+      <figure class="reveal" data-cap="Lab corridor"><img src="images/atc/corridor.jpg" alt="Decorated corridor leading to the lab" loading="lazy" decoding="async" /><figcaption>Lab corridor</figcaption></figure>
+      <figure class="reveal" data-cap="CVR and Mitsubishi Electric India teams at the ATC"><img src="images/atc/team.jpg" alt="CVR and Mitsubishi Electric India teams at the ATC" loading="lazy" decoding="async" /><figcaption>CVR × Mitsubishi Electric</figcaption></figure>
+      <figure class="reveal" data-cap="Award at the 3rd Authorised Training Center meet"><img src="images/atc/atc-meet.jpg" alt="Award presentation at the 3rd Authorised Training Center meet" loading="lazy" decoding="async" /><figcaption>3rd ATC meet</figcaption></figure>
+      <figure class="contain reveal" data-cap="Thank-you award from Mitsubishi Electric India, FY 2021-22"><img src="images/atc/trophy-fy21-22.jpg" alt="Mitsubishi Electric thank-you trophy for FY21-22" loading="lazy" decoding="async" /><figcaption>Appreciation · FY21-22</figcaption></figure>
+      <figure class="contain reveal" data-cap="Certificate of Appreciation, FY 2023-24"><img src="images/atc/certificate-fy23-24.jpg" alt="Certificate of Appreciation from Mitsubishi Electric India" loading="lazy" decoding="async" /><figcaption>Certificate · FY23-24</figcaption></figure>
+    </div>
+    <div class="gallery g3" data-lb-group="atc-docs">
+      <figure class="contain reveal" data-cap="MoU history roadmap"><img src="images/atc/mou-roadmap.jpg" alt="Roadmap of the MoU history between CVR and Mitsubishi Electric India" loading="lazy" decoding="async" /><figcaption>MoU history roadmap</figcaption></figure>
+      <figure class="contain reveal" data-cap="Regular training programs organised every academic year"><img src="images/atc/training-programs.jpg" alt="Regular training programs on factory automation tools" loading="lazy" decoding="async" /><figcaption>Regular training programs</figcaption></figure>
+      <figure class="contain reveal" data-cap="Training modules and equipment available at the ATC"><img src="images/atc/training-equipment.jpg" alt="Table of training modules and equipment available at the ATC" loading="lazy" decoding="async" /><figcaption>Training equipment</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ACHIEVEMENTS ================= -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Track Record</span>
+      <h2>A Decade of <span class="grad">Winning Projects</span></h2>
+      <p>Student teams from the ATC have competed at every edition of the Mitsubishi Electric Cup since 2016, and on the international stage at IEEE YESIST12. Tap a photo to see more.</p>
+    </div>
+
+    <div class="ach-grid">
+      <article class="card ach reveal" data-photos="images/achievements/a2-2.jpg|images/achievements/a2-3.jpg|images/achievements/a2-4.jpg|images/achievements/a2-5.jpg|images/achievements/a2-6.jpg|images/achievements/a2-7.jpg|images/achievements/a2-8.jpg">
+        <div class="ach-cover"><span class="ach-award">Appreciation · ₹28,000</span><img src="images/achievements/a2-2.jpg" alt="CVR team receiving the appreciation award at Mitsubishi Electric Cup 6" loading="lazy" decoding="async" /><span class="ach-count">7 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a2-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a2-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a2-4.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="3" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 4" aria-label="Photo 4"><img src="images/achievements/a2-5.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="4" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 5" aria-label="Photo 5"><img src="images/achievements/a2-6.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="5" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 6" aria-label="Photo 6"><img src="images/achievements/a2-7.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="6" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a2-8.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Feb 2026 · ME Cup 6</span>
+          <h3>Appreciation Award at Mitsubishi Electric Cup 6</h3>
+          <div class="project">Smart and Secured Water Grid System for Future Population Challenges</div>
+          <p>Final-year EIE &amp; AIML students competed at MIT World Peace University, Pune (19–21 Feb 2026). Mitsubishi Electric India sponsored ₹2.1 lakh of FA equipment for the finale.</p>
+          <details><summary>Project team</summary><div class="mentor">Mentor: G. Venkateswarlu, Sr. Asst. Prof, EIE</div><ul><li>Dodla Satish (EIE)</li><li>Bandari Revanth (EIE)</li><li>Gattu Tejaswini (EIE)</li><li>Bathula Sanjay (AIML)</li></ul></details>
+        </div>
+      </article>
+
+      <article class="card ach reveal" style="transition-delay:.08s" data-photos="images/achievements/a3-2.jpg|images/achievements/a3-3.jpg|images/achievements/a3-4.jpg|images/achievements/a3-5.jpg">
+        <div class="ach-cover"><span class="ach-award gold">1st Prize · USD 1,000</span><img src="images/achievements/a3-4.jpg" alt="IEEE YESIST12 2024 WePOWER Track winner trophy" loading="lazy" decoding="async" /><span class="ach-count">4 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="First Prize, WePOWER Track — Tunisia — Photo 1" aria-label="Photo 1"><img src="images/achievements/a3-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="First Prize, WePOWER Track — Tunisia — Photo 2" aria-label="Photo 2"><img src="images/achievements/a3-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="First Prize, WePOWER Track — Tunisia — Photo 3" aria-label="Photo 3"><img src="images/achievements/a3-4.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="3" data-cap="First Prize, WePOWER Track — Tunisia — Photo 4" aria-label="Photo 4"><img src="images/achievements/a3-5.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Sep 2024 · IEEE YESIST12</span>
+          <h3>First Prize, WePOWER Track — Tunisia</h3>
+          <div class="project">Smart SOLAR-WIND Powered EV Charging Station</div>
+          <p>Team “Eco-power Pioneers” won first prize out of 200+ submissions from five countries at IEEE YESIST12 2024, Tunisia (7–8 Sep 2024).</p>
+          <details><summary>Project team</summary><div class="mentor">Mentor: G. Venkateswarlu, Sr. Asst. Prof, EIE</div><ul><li>Bhavana Padihar (EIE)</li><li>Sai Krupa Thadishetti (EIE)</li><li>Shravani G.D (EIE)</li></ul></details>
+        </div>
+      </article>
+
+      <article class="card ach reveal" style="transition-delay:.16s" data-photos="images/achievements/a1-2.jpg|images/achievements/a1-3.jpg|images/achievements/a1-4.jpg">
+        <div class="ach-cover"><span class="ach-award">Certificate of Excellence</span><img src="images/achievements/a1-2.jpg" alt="EIE team receiving award at the Mitsubishi Electric FA ATC meet" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Outstanding Project Demo at the 3rd FA ATC Meet — Photo 1" aria-label="Photo 1"><img src="images/achievements/a1-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Outstanding Project Demo at the 3rd FA ATC Meet — Photo 2" aria-label="Photo 2"><img src="images/achievements/a1-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Outstanding Project Demo at the 3rd FA ATC Meet — Photo 3" aria-label="Photo 3"><img src="images/achievements/a1-4.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Feb 2024 · ATC Meet</span>
+          <h3>Outstanding Project Demo at the 3rd FA ATC Meet</h3>
+          <p>An EIE team received a certificate of excellence and an award for outstanding performance in a project demo at the Mitsubishi Electric FA Authorised Training Center meet, Institute of Technology, NIRMA University, Ahmedabad (22–23 Feb 2024).</p>
+        </div>
+      </article>
+
+      <article class="card ach reveal" data-photos="images/achievements/a4-2.jpg|images/achievements/a4-3.jpg">
+        <div class="ach-cover"><span class="ach-award">Special Mention</span><img src="images/achievements/a4-2.jpg" alt="Special mention award at IEEE YESIST12 2023, Egypt" loading="lazy" decoding="async" /><span class="ach-count">2 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Special Mention Award, WePOWER Track — Egypt — Photo 1" aria-label="Photo 1"><img src="images/achievements/a4-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Special Mention Award, WePOWER Track — Egypt — Photo 2" aria-label="Photo 2"><img src="images/achievements/a4-3.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Sep 2023 · IEEE YESIST12</span>
+          <h3>Special Mention Award, WePOWER Track — Egypt</h3>
+          <div class="project">Solar-Powered Charging Station for Electric Vehicles</div>
+          <p>Awarded at IEEE YESIST12 2023, Arab Academy for Science, Technology &amp; Maritime Transport, Alexandria, Egypt (2–3 Sep 2023).</p>
+          <details><summary>Project team</summary><div class="mentor">Mentor: G. Venkateswarlu, Sr. Asst. Prof, EIE</div><ul><li>MK Abhishek Basavesh (EIE)</li><li>K Narasimha Koushik (EIE)</li><li>N Supreet Reddy (EIE)</li><li>P. Bhavana (EIE)</li></ul></details>
+        </div>
+      </article>
+
+      <article class="card ach reveal" style="transition-delay:.08s" data-photos="images/achievements/a5-2.jpg|images/achievements/a5-3.jpg|images/achievements/a5-4.jpg">
+        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><img src="images/achievements/a5-2.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 5" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Bronze Trophy at Mitsubishi Electric Cup 5 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a5-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Bronze Trophy at Mitsubishi Electric Cup 5 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a5-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="2" data-cap="Bronze Trophy at Mitsubishi Electric Cup 5 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a5-4.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Feb 2020 · ME Cup 5</span>
+          <h3>Bronze Trophy at Mitsubishi Electric Cup 5</h3>
+          <div class="project">IoT Assisted Digitalization of Corona Treatment System</div>
+          <p>Held at B.M.S College of Engineering, Bangalore (16 Feb 2020). Mitsubishi Electric India sponsored ₹1.5 lakh of FA equipment; the college sanctioned ₹1.26 lakh for development.</p>
+          <details><summary>Project team</summary><div class="mentor">Mentor: G. Venkateswarlu, Asst. Prof, EIE</div><ul><li>K. Venkata Naveen (EIE)</li><li>P. Praneetha (EIE)</li><li>P. Sandeep Reddy (EIE)</li><li>K. Sasanka (CSE)</li></ul></details>
+        </div>
+      </article>
+
+      <article class="card ach reveal" style="transition-delay:.16s" data-photos="images/achievements/a6-2.jpg|images/achievements/a6-3.jpg|images/achievements/a6-4.jpg">
+        <div class="ach-cover"><span class="ach-award">4th Appreciation · ₹10,000</span><img src="images/achievements/a6-2.jpg" alt="CVR team on stage at Mitsubishi Electric Cup 4" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="4th Appreciation Award at Mitsubishi Electric Cup 4 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a6-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="4th Appreciation Award at Mitsubishi Electric Cup 4 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a6-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="4th Appreciation Award at Mitsubishi Electric Cup 4 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a6-4.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Feb 2019 · ME Cup 4</span>
+          <h3>4th Appreciation Award at Mitsubishi Electric Cup 4</h3>
+          <div class="project">IoT-Based GOT Assisted Hybrid Drug Dispensing System for Rural Landscape</div>
+          <p>Held at Manav Rachna International Institute of Research and Studies, Delhi (15–16 Feb 2019). ₹80,000 of FA equipment sponsored; the college sanctioned ₹1.42 lakh.</p>
+          <details><summary>Project team</summary><div class="mentor">Mentor: C. Pramod Kumar, Asst. Prof, EIE</div><ul><li>Rachakonda Anant (EIE)</li><li>Mourya Devulapally (EIE)</li><li>Sai Prasad (EIE)</li></ul></details>
+        </div>
+      </article>
+
+      <article class="card ach reveal" data-photos="images/achievements/a7-2.jpg|images/achievements/a7-3.jpg|images/achievements/a7-4.jpg">
+        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><img src="images/achievements/a7-2.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 3" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Bronze Trophy at Mitsubishi Electric Cup 3 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a7-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Bronze Trophy at Mitsubishi Electric Cup 3 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a7-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Bronze Trophy at Mitsubishi Electric Cup 3 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a7-4.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Feb 2018 · ME Cup 3</span>
+          <h3>Bronze Trophy at Mitsubishi Electric Cup 3</h3>
+          <div class="project">IoT-Based Centralized Water Distribution System for Metropolitan Cities</div>
+          <p>Held at Nirma University, Gujarat (17–18 Feb 2018). ₹80,000 of FA equipment sponsored; the college sanctioned ₹59,125.</p>
+          <details><summary>Project team</summary><div class="mentor">Mentor: G. Venkateswarlu, Asst. Prof, EIE</div><ul><li>Sowmya Aila (EIE)</li><li>Vijay Bhaskar (EIE)</li><li>R. Ananth (EIE)</li><li>B. Hema Sree (EIE)</li><li>Bhageerath Reddy (IT)</li></ul></details>
+        </div>
+      </article>
+
+      <article class="card ach reveal" style="transition-delay:.08s" data-photos="images/achievements/a8-2.jpg|images/achievements/a8-3.jpg|images/achievements/a8-4.jpg|images/achievements/a8-5.jpg">
+        <div class="ach-cover"><span class="ach-award">Appreciation · ₹10,000</span><img src="images/achievements/a8-3.jpg" alt="Robotic system built for Mitsubishi Electric Cup 2" loading="lazy" decoding="async" /><span class="ach-count">4 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Appreciation Award at Mitsubishi Electric Cup 2 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a8-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Appreciation Award at Mitsubishi Electric Cup 2 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a8-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Appreciation Award at Mitsubishi Electric Cup 2 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a8-4.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="3" data-cap="Appreciation Award at Mitsubishi Electric Cup 2 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a8-5.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Feb 2017 · ME Cup 2</span>
+          <h3>Appreciation Award at Mitsubishi Electric Cup 2</h3>
+          <div class="project">Virtually Transcribed and Restrained Robotic System</div>
+          <p>Held at College of Engineering Pune (18 Feb 2017). ₹80,000 of FA equipment sponsored; the college sanctioned ₹74,240.</p>
+          <details><summary>Project team</summary><div class="mentor">Mentor: G. Venkateswarlu, Asst. Prof, EIE</div><ul><li>S. Harsha Vardhan (EIE)</li><li>Akhil Teja (EIE)</li><li>Hakeem Mahesh Babu (EIE)</li><li>G. Venkatesh (CSE)</li></ul></details>
+        </div>
+      </article>
+
+      <article class="card ach reveal" style="transition-delay:.16s" data-photos="images/achievements/a9-2.jpg|images/achievements/a9-3.jpg|images/achievements/a9-4.jpg|images/achievements/a9-5.jpg|images/achievements/a9-6.jpg">
+        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><img src="images/achievements/a9-3.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 1" loading="lazy" decoding="async" /><span class="ach-count">5 photos</span></div>
+        <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a9-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a9-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a9-4.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="3" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a9-5.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="4" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a9-6.jpg" alt="" loading="lazy" decoding="async" /></button></div>
+        <div class="ach-body">
+          <span class="ach-when">Feb 2016 · ME Cup 1</span>
+          <h3>Bronze Trophy at Mitsubishi Electric Cup 1</h3>
+          <div class="project">Intelligent Transport System (ITS)</div>
+          <p>Held at Vishwakarma Institute of Technology, Pune (13 Feb 2016). ₹78,000 of FA equipment sponsored; the college sanctioned ₹34,000.</p>
+          <details><summary>Project team</summary><div class="mentor">Mentor: G. Venkateswarlu, Asst. Prof, EIE</div><ul><li>Pankaj Rautel (EIE)</li><li>G. Ravi Kumar Rao (EEE)</li><li>Bipin Wilson (EIE)</li><li>Adapa V. Shravani (EIE)</li></ul></details>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INDUSTRY TRAINING ================= -->
+<section id="training">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Industry Training</span>
+      <h2>Upskilling <span class="grad">Mahindra &amp; Mahindra</span></h2>
+      <p>Skill-enhancement programs delivered at the ATC for the Mahindra &amp; Mahindra Automotive Division, Zaheerabad — July 2024 to March 2025.</p>
+    </div>
+
+    <div class="stats" style="margin-top:0">
+      <div class="card stat reveal"><b class="grad">9</b><span>Training modules</span></div>
+      <div class="card stat reveal" style="transition-delay:.08s"><b class="grad">3</b><span>Programs</span></div>
+      <div class="card stat reveal" style="transition-delay:.16s"><b class="grad">L1–L3</b><span>Basic to advanced levels</span></div>
+      <div class="card stat reveal" style="transition-delay:.24s"><b class="grad">10</b><span>Months of training</span></div>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table class="t-table">
+        <thead><tr><th>#</th><th>Module / Technology</th><th>Program</th><th>Level</th><th>Date (8:30 AM – 4:30 PM)</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><b>MELSEC iQ-F PLC</b></td><td>Program 1</td><td><span class="lvl lvl-1">Level 1</span></td><td>29–30 Jul 2024</td></tr>
+          <tr><td>2</td><td><b>GOT2000</b> (Graphic Operation Terminal)</td><td>Program 1</td><td><span class="lvl lvl-1">Level 1</span></td><td>31 Jul 2024</td></tr>
+          <tr><td>3</td><td><b>CC-Link &amp; CC-Link IE Field</b></td><td>Program 1</td><td><span class="lvl lvl-1">Level 1</span></td><td>26 Aug 2024</td></tr>
+          <tr><td>4</td><td><b>VFD A800</b> (Variable Frequency Drives)</td><td>Program 2</td><td><span class="lvl lvl-1">Level 1</span></td><td>27 Aug 2024</td></tr>
+          <tr><td>5</td><td><b>MELSEC iQ-R PLC</b> (Batch 1)</td><td>Program 2</td><td><span class="lvl lvl-2">Level 2</span></td><td>24–25 Sep 2024</td></tr>
+          <tr><td>6</td><td><b>GOT2000 Advanced</b></td><td>Program 2</td><td><span class="lvl lvl-2">Level 2</span></td><td>25 Oct 2024</td></tr>
+          <tr><td>7</td><td><b>MELSEC iQ-R PLC</b> (Batch 2)</td><td>Program 3</td><td><span class="lvl lvl-2">Level 2</span></td><td>23–24 Oct 2024</td></tr>
+          <tr><td>8</td><td><b>Servo (MR-J4-GF)</b> &amp; Network — EtherNet/IP, third-party communication</td><td>Program 3</td><td><span class="lvl lvl-2">Level 2</span></td><td>30–31 Jan 2025</td></tr>
+          <tr><td>9</td><td><b>Safety PLC</b></td><td>Program 3</td><td><span class="lvl lvl-3">Level 3</span></td><td>27 Mar 2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-head reveal">Training Modules &amp; Contents</h3>
+    <div class="modules">
+      <div class="card reveal"><span class="lvl lvl-1">L1 · PLC</span><h4>MELSEC iQ-F PLC</h4><p>Introduction to iQ-F series, I/O addressing, programming with GX Works3, applied instructions, timers, counters, analog interface, function blocks &amp; libraries.</p></div>
+      <div class="card reveal" style="transition-delay:.08s"><span class="lvl lvl-1">L1 · HMI</span><h4>GOT2000</h4><p>GOT2000 hardware, screen design with GT Designer3, alarms, graphs, comments, recipes, ladder monitoring &amp; editing, program diagnosis.</p></div>
+      <div class="card reveal" style="transition-delay:.16s"><span class="lvl lvl-1">L1 · Network</span><h4>CC-Link &amp; CC-Link IE Field</h4><p>Network addressing &amp; connections, master–remote and CPU–CPU interface, troubleshooting, hardware tests, IE Field topology and remote I/O stations.</p></div>
+      <div class="card reveal"><span class="lvl lvl-1">L1 · Drives</span><h4>VFD A800</h4><p>Inverter basics, A800/E800 series, V/F control, jogging, parameter setting, multi-speed operation and troubleshooting.</p></div>
+      <div class="card reveal" style="transition-delay:.08s"><span class="lvl lvl-2">L2 · PLC</span><h4>MELSEC iQ-R PLC</h4><p>iQ-R vs Q series, compatibility in existing lines, library functions, applied instructions, data labels, analog interface, maintenance &amp; security functions.</p></div>
+      <div class="card reveal" style="transition-delay:.16s"><span class="lvl lvl-2">L2 · HMI</span><h4>GOT2000 Advanced</h4><p>Program diagnosis &amp; backup via GOT, one-touch jump, communication options, data logging and graphs.</p></div>
+      <div class="card reveal"><span class="lvl lvl-2">L2 · Network</span><h4>EtherNet/IP &amp; Third-Party</h4><p>EtherNet/IP and third-party communication — DeviceNet, Profibus, Modbus TCP.</p></div>
+      <div class="card reveal" style="transition-delay:.08s"><span class="lvl lvl-2">L2 · Servo</span><h4>Servo MR-J4-GF</h4><p>Mitsubishi servo range, CC-Link IE Field based controller &amp; amplifier, positioning with QD77GF, M-codes and the Simple Motion configurator.</p></div>
+      <div class="card reveal" style="transition-delay:.16s"><span class="lvl lvl-3">L3 · Safety</span><h4>Safety PLC</h4><p>Safety CPU features, iQ-R safety I/O, wiring of safety PLC &amp; remote I/O, CC-Link IE Field Network Safety, project creation and station settings.</p></div>
+    </div>
+
+    <h3 class="sub-head reveal">Training Snapshots</h3>
+    <div class="gallery" data-lb-group="training">
+      <figure class="wide reveal" data-cap="Mahindra &amp; Mahindra training batch at the ATC"><img src="images/training/mahindra-3.jpg" alt="Mahindra training batch during hands-on sessions" loading="lazy" decoding="async" /></figure>
+      <figure class="reveal" data-cap="Hands-on PLC and HMI sessions"><img src="images/training/mahindra-4.jpg" alt="Participants working on PLC trainers" loading="lazy" decoding="async" /></figure>
+      <figure class="reveal" data-cap="Training sessions in the lab"><img src="images/training/mahindra-5.jpg" alt="Participants in training sessions" loading="lazy" decoding="async" /></figure>
+      <figure class="reveal" data-cap="Classroom and lab sessions"><img src="images/training/mahindra-6.jpg" alt="Classroom and lab sessions for Mahindra engineers" loading="lazy" decoding="async" /></figure>
+      <figure class="reveal" data-cap="Servo and network training"><img src="images/training/mahindra-7.jpg" alt="Participants during servo and network training" loading="lazy" decoding="async" /></figure>
+      <figure class="reveal" data-cap="Training batch"><img src="images/training/mahindra-8.jpg" alt="Mahindra training batch group photo" loading="lazy" decoding="async" /></figure>
+      <figure class="reveal" data-cap="Safety PLC training batch"><img src="images/training/mahindra-9.jpg" alt="Safety PLC training batch" loading="lazy" decoding="async" /></figure>
+    </div>
+  </div>
+</section>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <img id="lbImg" alt="" />
+  <div class="lb-cap" id="lbCap"></div>
+  <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+  <button class="lb-prev" id="lbPrev" aria-label="Previous photo">‹</button>
+  <button class="lb-next" id="lbNext" aria-label="Next photo">›</button>
+</div>
 
 <!-- ================= VENUE ================= -->
 <section id="venue">
@@ -996,7 +1312,7 @@
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap">
       <a href="https://mitsubishielectric.in/fa/mecup/" target="_blank" rel="noopener">Official Site</a>
-      <a href="https://cvr.ac.in" target="_blank" rel="noopener">CVR College</a>
+      <a href="https://cvr.ac.in" target="_blank" rel="noopener">CVR College of Engineering</a>
       <a href="#home">Back to top ↑</a>
     </div>
   </div>
@@ -1074,14 +1390,15 @@
     links.forEach((l, i) => l.classList.toggle('active', i === cur));
     updateTimeline();
   }
-  addEventListener('scroll', onScroll, { passive: true });
+  let scrollQueued = false;
+  addEventListener('scroll', () => { if (scrollQueued) return; scrollQueued = true; requestAnimationFrame(() => { scrollQueued = false; onScroll(); }); }, { passive: true });
   toTop.onclick = () => scrollTo({ top: 0, behavior: 'smooth' });
 
   /* Mobile menu */
   const menuBtn = document.getElementById('menuBtn'), navLinks = document.getElementById('navLinks');
   menuBtn.onclick = () => { menuBtn.classList.toggle('open'); const o = navLinks.classList.toggle('open'); nav.classList.toggle('menu-open', o); document.body.style.overflow = o ? 'hidden' : ''; };
   links.forEach(l => l.onclick = () => { menuBtn.classList.remove('open'); navLinks.classList.remove('open'); nav.classList.remove('menu-open'); document.body.style.overflow = ''; });
-  addEventListener('resize', () => { if (innerWidth > 760) { menuBtn.classList.remove('open'); navLinks.classList.remove('open'); nav.classList.remove('menu-open'); document.body.style.overflow = ''; } });
+  addEventListener('resize', () => { if (innerWidth > 1060) { menuBtn.classList.remove('open'); navLinks.classList.remove('open'); nav.classList.remove('menu-open'); document.body.style.overflow = ''; } });
 
   /* Scroll reveal */
   const io = new IntersectionObserver(entries => entries.forEach(e => {
@@ -1093,7 +1410,7 @@
   /* Typing effect */
   const words = ['Digital Minds', 'Industrial IoT', 'AI & Analytics', 'Smart Robotics', 'Green Energy'];
   const typed = document.getElementById('typed');
-  if (!reduce) {
+  if (typed && !reduce) {
     let w = 0, c = words[0].length, del = true;
     setTimeout(function loop() {
       const word = words[w];
@@ -1197,7 +1514,7 @@
     W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr;
     cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.min(64, Math.floor(innerWidth * innerHeight / 22000));
+    const n = Math.min(innerWidth < 600 ? 45 : 95, Math.floor(innerWidth * innerHeight / 14000));
     pts = Array.from({ length: n }, () => ({
       x: Math.random() * innerWidth, y: Math.random() * innerHeight,
       vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
@@ -1213,23 +1530,36 @@
       if (p.x < 0 || p.x > innerWidth) p.vx *= -1;
       if (p.y < 0 || p.y > innerHeight) p.vy *= -1;
     }
+    /* Lines are grouped into a few alpha levels so each level is one stroke() call */
+    const L = 6, segs = Array.from({ length: L }, () => []), dark = window.__axDark;
     for (let i = 0; i < pts.length; i++) {
       const a = pts[i];
       for (let j = i + 1; j < pts.length; j++) {
         const b = pts[j], dx = a.x - b.x, dy = a.y - b.y, d = dx * dx + dy * dy;
-        if (d < 16000) {
-          ctx.strokeStyle = window.__axDark ? `rgba(150,160,255,${(1 - d / 16000) * .2})` : `rgba(43,47,143,${(1 - d / 16000) * .12})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); // right-angle "traces"
-        }
+        if (d < 16000) segs[Math.min(L - 1, (1 - d / 16000) * L | 0)].push(a, b);
       }
+    }
+    ctx.lineWidth = 1;
+    for (let k = 0; k < L; k++) {
+      const list = segs[k]; if (!list.length) continue;
+      const al = (k + .5) / L;
+      ctx.strokeStyle = dark ? `rgba(150,160,255,${al * .2})` : `rgba(43,47,143,${al * .12})`;
+      ctx.beginPath();
+      for (let q = 0; q < list.length; q += 2) { const a = list[q], b = list[q + 1]; ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, a.y); ctx.lineTo(b.x, b.y); } // right-angle "traces"
+      ctx.stroke();
+    }
+    for (const a of pts) {
       const md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
       if (md < 160) {
         ctx.strokeStyle = `rgba(230,0,18,${(1 - md / 160) * .35})`;
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
       }
-      ctx.fillStyle = a.red ? (window.__axDark ? 'rgba(255,58,76,.85)' : 'rgba(230,0,18,.55)') : (window.__axDark ? 'rgba(200,210,255,.5)' : 'rgba(43,47,143,.28)');
-      ctx.beginPath(); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); ctx.fill();
+    }
+    for (const red of [false, true]) {
+      ctx.fillStyle = red ? (dark ? 'rgba(255,58,76,.85)' : 'rgba(230,0,18,.55)') : (dark ? 'rgba(200,210,255,.5)' : 'rgba(43,47,143,.28)');
+      ctx.beginPath();
+      for (const a of pts) if (a.red === red) { ctx.moveTo(a.x + a.r, a.y); ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2); }
+      ctx.fill();
     }
     if (!reduce) requestAnimationFrame(draw);
   }
@@ -1244,9 +1574,10 @@
 
   /* ---------- V4: particle morph ---------- */
   const stage = document.getElementById('v4Stage'), cv = document.getElementById('morph'), ctx = cv.getContext('2d');
-  const word = document.getElementById('morphWord'), chips = [...document.querySelectorAll('#shapeChips button')];
+  const word = document.getElementById('morphWord');
   const words = ['factories', 'machines', 'robots', 'plants', 'futures'];
-  const COUNT = innerWidth < 600 ? 420 : 700;
+  const COUNT = innerWidth < 600 ? 1000 : 1800, MIN_COUNT = innerWidth < 600 ? 500 : 800;
+  let active = COUNT;
   let S = 0, shapes = [], parts = [], shapeIdx = 0, running = false, lastUser = 0, cycle = null;
   const mouse = { x: -1e4, y: -1e4 };
   const drawers = [
@@ -1287,7 +1618,7 @@
     const o = document.createElement('canvas'); o.width = o.height = S;
     const c = o.getContext('2d'); c.fillStyle = '#000'; c.strokeStyle = '#000'; fn(c, S);
     const d = c.getImageData(0, 0, S, S).data, pts = [];
-    const step = Math.max(3, Math.round(S / 82));
+    const step = Math.max(3, Math.round(S / 120));
     for (let y = 0; y < S; y += step) for (let x = 0; x < S; x += step) if (d[(y * S + x) * 4 + 3] > 128) pts.push([x, y]);
     for (let i = pts.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [pts[i], pts[j]] = [pts[j], pts[i]]; }
     return pts;
@@ -1298,7 +1629,7 @@
     if (!S) return;
     cv.width = cv.height = S * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     shapes = drawers.map(sample);
-    if (!parts.length) parts = Array.from({ length: COUNT }, () => ({ x: Math.random() * S, y: Math.random() * S, vx: 0, vy: 0, tx: 0, ty: 0, s: Math.random() * 1.3 + 1.5 }));
+    if (!parts.length) parts = Array.from({ length: COUNT }, () => ({ x: Math.random() * S, y: Math.random() * S, vx: 0, vy: 0, tx: 0, ty: 0, s: Math.random() * 1.1 + 1.2 }));
     target(shapeIdx);
   }
   function target(i) {
@@ -1309,40 +1640,103 @@
     shapeIdx = (i + shapes.length) % shapes.length;
     target(shapeIdx);
     parts.forEach(p => { p.vx += (Math.random() - .5) * 18; p.vy += (Math.random() - .5) * 18; });
-    chips.forEach((c, k) => { c.classList.toggle('active', k === shapeIdx); if (k === shapeIdx) { c.classList.remove('active'); void c.offsetWidth; c.classList.add('active'); } });
     word.classList.add('out');
     setTimeout(() => { word.textContent = words[shapeIdx]; word.classList.remove('out'); }, 300);
     if (user) lastUser = Date.now();
   }
-  chips.forEach(c => c.addEventListener('click', () => setShape(+c.dataset.s, true)));
   stage.addEventListener('click', () => setShape(shapeIdx + 1, true));
   stage.addEventListener('pointermove', e => { const r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; });
   stage.addEventListener('pointerleave', () => { mouse.x = mouse.y = -1e4; });
-  const C1 = [230, 0, 18], C2L = [91, 43, 214], C2D = [150, 110, 255];
-  function frame() {
+  /* Colour gradient is quantised into buckets so each frame is ~24 fill calls instead of one per particle */
+  const C1 = [230, 0, 18], C2L = [91, 43, 214], C2D = [150, 110, 255], NB = 24;
+  const ramp = C2 => Array.from({ length: NB }, (_, i) => { const t = i / (NB - 1); return `rgb(${C1[0] + (C2[0] - C1[0]) * t | 0},${C1[1] + (C2[1] - C1[1]) * t | 0},${C1[2] + (C2[2] - C1[2]) * t | 0})`; });
+  const rampL = ramp(C2L), rampD = ramp(C2D), buckets = Array.from({ length: NB }, () => []);
+  let lastT = 0, slow = 0, frames = 0;
+  function frame(now) {
     if (!running) return;
+    /* Adaptive quality: if frames run long, shed particles until it is smooth again */
+    if (lastT) { const dt = now - lastT; frames++; if (dt > 24) slow++; if (frames >= 60) { if (slow > 15 && active > MIN_COUNT) active = Math.max(MIN_COUNT, active * .8 | 0); frames = slow = 0; } }
+    lastT = now;
     ctx.clearRect(0, 0, S, S);
-    for (const p of parts) {
+    for (const b of buckets) b.length = 0;
+    const mx = mouse.x, my = mouse.y, kb = (NB - 1) / S;
+    for (let i = 0; i < active; i++) {
+      const p = parts[i];
       p.vx += (p.tx - p.x) * 0.055; p.vy += (p.ty - p.y) * 0.055;
-      const dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
+      const dx = p.x - mx, dy = p.y - my, d2 = dx * dx + dy * dy;
       if (d2 < 7000) { const d = Math.sqrt(d2) || 1, f = (1 - d / 84) * 7; p.vx += dx / d * f; p.vy += dy / d * f; }
       p.vx *= 0.8; p.vy *= 0.8; p.x += p.vx; p.y += p.vy;
-      const t = Math.min(Math.max(p.x / S, 0), 1), C2 = window.__axDark ? C2D : C2L;
-      ctx.fillStyle = `rgb(${C1[0] + (C2[0] - C1[0]) * t | 0},${C1[1] + (C2[1] - C1[1]) * t | 0},${C1[2] + (C2[2] - C1[2]) * t | 0})`;
-      ctx.fillRect(p.x, p.y, p.s, p.s);
+      let b = p.x * kb | 0; b = b < 0 ? 0 : b >= NB ? NB - 1 : b;
+      buckets[b].push(p);
+    }
+    const cols = window.__axDark ? rampD : rampL;
+    for (let b = 0; b < NB; b++) {
+      const list = buckets[b]; if (!list.length) continue;
+      ctx.fillStyle = cols[b]; ctx.beginPath();
+      for (const p of list) ctx.rect(p.x, p.y, p.s, p.s);
+      ctx.fill();
     }
     if (!reduce) requestAnimationFrame(frame);
   }
   function startV4() {
     if (running) return;
-    build(); running = true; frame();
+    if (!shapes.length) build();
+    running = true; lastT = 0; requestAnimationFrame(frame);
     clearInterval(cycle);
     if (!reduce) cycle = setInterval(() => { if (Date.now() - lastUser > 8000) setShape(shapeIdx + 1); }, 4500);
   }
   function stopV4() { running = false; clearInterval(cycle); }
-  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (running) build(); }, 200); });
+  let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (running) build(); else shapes = []; }, 200); });
 
-  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(startV4);
+  /* Only animate while the hero is on screen */
+  let built = false;
+  const vis = new IntersectionObserver(([e]) => { if (e.isIntersecting) { if (built) startV4(); } else stopV4(); });
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => { built = true; startV4(); vis.observe(stage); });
+})();
+</script>
+
+<script>
+/* ---------- Photo lightbox (ATC gallery, achievements, training) ---------- */
+(() => {
+  const lb = document.getElementById('lb'), img = document.getElementById('lbImg'), cap = document.getElementById('lbCap');
+  let list = [], idx = 0, lastFocus = null;
+  function show(i) {
+    idx = (i + list.length) % list.length;
+    img.src = list[idx].src; img.alt = list[idx].cap;
+    cap.textContent = list[idx].cap + (list.length > 1 ? `  ·  ${idx + 1} / ${list.length}` : '');
+    lb.querySelectorAll('.lb-prev, .lb-next').forEach(b => b.style.display = list.length > 1 ? '' : 'none');
+  }
+  function open(items, i) { list = items; lastFocus = document.activeElement; lb.classList.add('open'); document.body.style.overflow = 'hidden'; show(i); document.getElementById('lbClose').focus(); }
+  function close() { lb.classList.remove('open'); img.removeAttribute('src'); document.body.style.overflow = ''; if (lastFocus) lastFocus.focus(); }
+
+  document.querySelectorAll('.gallery').forEach(g => {
+    const figs = [...g.querySelectorAll('figure')];
+    const items = figs.map(f => ({ src: f.querySelector('img').getAttribute('src'), cap: f.dataset.cap || f.querySelector('img').alt }));
+    figs.forEach((f, i) => { f.tabIndex = 0; f.setAttribute('role', 'button'); f.onclick = () => open(items, i); f.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(items, i); } }; });
+  });
+  document.querySelectorAll('.atc-photo').forEach(f => { f.style.cursor = 'zoom-in'; f.onclick = () => open([{ src: f.querySelector('img').getAttribute('src'), cap: f.dataset.cap }], 0); });
+  document.querySelectorAll('.ach[data-photos]').forEach(a => {
+    const title = a.querySelector('h3').textContent, cover = a.querySelector('.ach-cover');
+    const thumbs = [...a.querySelectorAll('.ach-thumb')];
+    const items = thumbs.map(t => ({ src: t.querySelector('img').getAttribute('src'), cap: t.dataset.cap }));
+    const start = Math.max(0, items.findIndex(it => it.src === cover.querySelector('img').getAttribute('src')));
+    cover.tabIndex = 0; cover.setAttribute('role', 'button'); cover.setAttribute('aria-label', `View photos: ${title}`);
+    cover.onclick = () => open(items, start);
+    cover.onkeydown = e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(items, start); } };
+    thumbs.forEach((t, i) => t.onclick = () => open(items, i));
+  });
+
+  document.getElementById('lbClose').onclick = close;
+  document.getElementById('lbPrev').onclick = () => show(idx - 1);
+  document.getElementById('lbNext').onclick = () => show(idx + 1);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close(); else if (e.key === 'ArrowLeft') show(idx - 1); else if (e.key === 'ArrowRight') show(idx + 1);
+  });
+  let x0 = null;
+  lb.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1)); x0 = null; });
 })();
 </script>
 

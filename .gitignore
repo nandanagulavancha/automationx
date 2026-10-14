@@ -1,0 +1,6 @@
+# Source Word documents (content is already in index.html)
+*.docx
+~$*.docx
+
+# macOS
+.DS_Store
