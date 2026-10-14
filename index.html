@@ -468,8 +468,6 @@
   .atc-intro { display: grid; grid-template-columns: 1.1fr .9fr; gap: 28px; align-items: stretch; }
   .atc-intro .card p + p { margin-top: 12px; }
   .atc-intro .lead { color: var(--text-2); font-size: 16px; }
-  .atc-badge { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
-  .atc-badge img { width: 150px; border-radius: 8px; background: #fff; }
   .atc-photo { border-radius: var(--radius); overflow: hidden; position: relative; min-height: 280px; box-shadow: var(--shadow); }
   .atc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 28px; }
@@ -508,7 +506,6 @@
   .ach-thumb img { width: 100%; height: 100%; object-fit: cover; }
   .ach-thumb.letter img { object-fit: cover; object-position: top; background: #fff; }
   .ach-thumb:hover, .ach-thumb:focus-visible { border-color: var(--red); transform: translateY(-2px); outline: none; }
-  .atc-badge .cvr-logo { width: 72px; background: none; }
   .ach-body { padding: 20px 22px 24px; display: flex; flex-direction: column; flex: 1; }
   .ach-when { font-family: 'Outfit', sans-serif; font-weight: 700; color: var(--red-2); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
   .ach h3 { font-size: 18px; line-height: 1.3; margin: 6px 0 8px; }
@@ -541,6 +538,50 @@
   .modules .card { padding: 20px 22px; }
   .modules h4 { font-size: 15px; margin: 8px 0 6px; }
   .modules p { font-size: 13.5px; }
+
+  /* CVR branding */
+  .host-badge {
+    display: inline-flex; align-items: center; gap: 14px; margin-top: 30px; padding: 10px 20px 10px 10px; border-radius: 18px;
+    background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); transition: transform .3s, border-color .3s;
+  }
+  .host-badge:hover { transform: translateY(-3px); border-color: rgba(230,0,18,.4); }
+  .host-badge img { width: 54px; height: 54px; object-fit: contain; flex-shrink: 0; }
+  .host-badge small { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: 1.8px; text-transform: uppercase; color: var(--red-text); }
+  .host-badge b { display: block; font-family: 'Outfit', sans-serif; font-size: 17px; line-height: 1.2; color: var(--ink); }
+  .host-badge span { display: block; font-size: 12.5px; color: var(--muted); }
+  .cvr-seal { display: inline-grid; place-items: center; border-radius: 50%; background: #fff; box-shadow: 0 4px 14px -4px rgba(0,0,0,.35); }
+  .cvr-seal img { width: 84%; height: 84%; object-fit: contain; }
+  .cobrand { display: flex; align-items: center; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
+  .cobrand .cvr-seal { width: 76px; height: 76px; }
+  .cobrand .x { font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 22px; color: var(--red); }
+  .cobrand .atc-mark { height: 64px; width: auto; border-radius: 8px; background: #fff; }
+  .cobrand-cap { flex-basis: 100%; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  .has-mark { position: relative; overflow: hidden; isolation: isolate; }
+  .has-mark::after {
+    content: ''; position: absolute; width: 520px; height: 520px; right: -140px; top: 60px; z-index: -1; pointer-events: none;
+    background: url(images/atc/cvr-logo-t.png) center / contain no-repeat; opacity: .05; filter: grayscale(.3);
+  }
+  #achievements.has-mark::after { right: auto; left: -160px; top: 120px; }
+  .team-cvr {
+    display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center; margin-bottom: 40px; padding: 26px 30px;
+    border-radius: 24px; background: var(--banner-grad); border: 1px solid var(--card-border); box-shadow: var(--shadow);
+  }
+  .team-cvr .cvr-seal { width: 104px; height: 104px; }
+  .team-cvr h3 { font-family: 'Outfit', sans-serif; font-size: clamp(20px, 2.4vw, 26px); font-weight: 700; line-height: 1.2; color: var(--ink); }
+  .team-cvr p { color: var(--text-2); font-size: 14.5px; margin-top: 4px; }
+  .team-stats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+  .team-stats span { font-size: 13px; font-weight: 700; padding: 7px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); }
+  .team-stats span b { color: var(--red-text); }
+  .ach-cover .cvr-seal { position: absolute; left: 10px; bottom: 10px; width: 38px; height: 38px; z-index: 1; }
+  .ach-team-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .foot-brand { display: flex; align-items: center; gap: 14px; }
+  .foot-brand .cvr-seal { width: 52px; height: 52px; flex-shrink: 0; }
+  @media (max-width: 760px) {
+    .team-cvr { grid-template-columns: 1fr; text-align: left; padding: 22px; gap: 14px; }
+    .team-cvr .cvr-seal { width: 76px; height: 76px; }
+    .host-badge { width: 100%; }
+    .has-mark::after { width: 320px; height: 320px; right: -120px; }
+  }
 
   /* Lightbox */
   .lb { position: fixed; inset: 0; z-index: 500; background: rgba(5,6,16,.92); display: none; align-items: center; justify-content: center; padding: 56px 16px 70px; }
@@ -789,6 +830,10 @@
         <a href="https://mitsubishielectric.in/fa/mecup/registration-form.php" target="_blank" rel="noopener" class="btn btn-primary">Register Free <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
         <a href="#prizes" class="btn btn-ghost">View Prizes</a>
       </div>
+      <a class="host-badge" href="#atc">
+        <img src="images/atc/cvr-logo-t.png" alt="CVR College of Engineering logo" width="54" height="54" decoding="async" />
+        <div><small>Hosted by</small><b>CVR College of Engineering</b><span>Hyderabad · Mitsubishi Electric FA Authorised Training Center</span></div>
+      </a>
     </div>
     <div class="v4-stage" id="v4Stage"><canvas id="morph" aria-label="Particles forming automation shapes"></canvas><span class="v4-hint">Move through the particles · tap to morph</span></div>
   </div>
@@ -993,17 +1038,17 @@
 </section>
 
 <!-- ================= ATC ================= -->
-<section id="atc">
+<section id="atc" class="has-mark">
   <div class="container">
     <div class="section-head reveal">
-      <span class="kicker">Your Host</span>
+      <span class="kicker">Your Host · CVR College of Engineering</span>
       <h2>Mitsubishi Electric FA <span class="grad">Authorised Training Center</span></h2>
       <p>A decade-long, industry-integrated initiative at CVR College of Engineering dedicated to automation skill development, practical training and innovative product design.</p>
     </div>
 
     <div class="atc-intro">
       <div class="card reveal left">
-        <div class="atc-badge"><img class="cvr-logo" src="images/atc/cvr-logo.png" alt="CVR College of Engineering logo" loading="lazy" decoding="async" /><img src="images/atc/atc-logo.jpg" alt="Mitsubishi Electric Factory Automation Authorised Training Center logo" loading="lazy" decoding="async" /></div>
+        <div class="cobrand"><span class="cvr-seal"><img src="images/atc/cvr-logo-t.png" alt="CVR College of Engineering logo" loading="lazy" decoding="async" /></span><span class="x">×</span><img class="atc-mark" src="images/atc/atc-logo.jpg" alt="Mitsubishi Electric Factory Automation Authorised Training Center logo" loading="lazy" decoding="async" /><span class="cobrand-cap">CVR College of Engineering × Mitsubishi Electric India</span></div>
         <p class="lead">Established in <b>February 2015</b> in collaboration with Mitsubishi Electric India Pvt. Ltd., the Factory Automation Lab was built with <b>₹80 lakhs</b> of sponsored equipment to give students and industry professionals hands-on exposure to advanced industrial automation.</p>
         <p>Recognised as a Mitsubishi Electric Authorised Training Center (ATC), the lab is <b>one of only 10 ATCs in India</b> — and the only one in Telangana and Andhra Pradesh — making CVR a hub for industrial automation training and industry–academia engagement.</p>
       </div>
@@ -1062,7 +1107,7 @@
 </section>
 
 <!-- ================= ACHIEVEMENTS ================= -->
-<section id="achievements">
+<section id="achievements" class="has-mark">
   <div class="container">
     <div class="section-head reveal">
       <span class="kicker">Track Record</span>
@@ -1070,9 +1115,18 @@
       <p>Student teams from the ATC have competed at every edition of the Mitsubishi Electric Cup since 2016, and on the international stage at IEEE YESIST12. Tap a photo to see more.</p>
     </div>
 
+    <div class="team-cvr reveal zoom">
+      <span class="cvr-seal"><img src="images/atc/cvr-logo-t.png" alt="CVR College of Engineering logo" loading="lazy" decoding="async" /></span>
+      <div>
+        <h3>Team CVR · CVR College of Engineering, Hyderabad</h3>
+        <p>Student teams from the Mitsubishi Electric FA ATC, mentored by EIE faculty, at national and international automation competitions.</p>
+        <div class="team-stats"><span><b>6</b> ME Cup finals</span><span><b>3</b> Bronze Trophies</span><span><b>1st Prize</b> IEEE YESIST12</span><span><b>9</b> awards since 2016</span></div>
+      </div>
+    </div>
+
     <div class="ach-grid">
       <article class="card ach reveal" data-photos="images/achievements/a2-2.jpg|images/achievements/a2-3.jpg|images/achievements/a2-4.jpg|images/achievements/a2-5.jpg|images/achievements/a2-6.jpg|images/achievements/a2-7.jpg|images/achievements/a2-8.jpg">
-        <div class="ach-cover"><span class="ach-award">Appreciation · ₹28,000</span><img src="images/achievements/a2-2.jpg" alt="CVR team receiving the appreciation award at Mitsubishi Electric Cup 6" loading="lazy" decoding="async" /><span class="ach-count">7 photos</span></div>
+        <div class="ach-cover"><span class="ach-award">Appreciation · ₹28,000</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a2-2.jpg" alt="CVR team receiving the appreciation award at Mitsubishi Electric Cup 6" loading="lazy" decoding="async" /><span class="ach-count">7 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a2-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a2-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a2-4.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="3" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 4" aria-label="Photo 4"><img src="images/achievements/a2-5.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="4" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 5" aria-label="Photo 5"><img src="images/achievements/a2-6.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="5" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Photo 6" aria-label="Photo 6"><img src="images/achievements/a2-7.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="6" data-cap="Appreciation Award at Mitsubishi Electric Cup 6 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a2-8.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Feb 2026 · ME Cup 6</span>
@@ -1084,7 +1138,7 @@
       </article>
 
       <article class="card ach reveal" style="transition-delay:.08s" data-photos="images/achievements/a3-2.jpg|images/achievements/a3-3.jpg|images/achievements/a3-4.jpg|images/achievements/a3-5.jpg">
-        <div class="ach-cover"><span class="ach-award gold">1st Prize · USD 1,000</span><img src="images/achievements/a3-4.jpg" alt="IEEE YESIST12 2024 WePOWER Track winner trophy" loading="lazy" decoding="async" /><span class="ach-count">4 photos</span></div>
+        <div class="ach-cover"><span class="ach-award gold">1st Prize · USD 1,000</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a3-4.jpg" alt="IEEE YESIST12 2024 WePOWER Track winner trophy" loading="lazy" decoding="async" /><span class="ach-count">4 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="First Prize, WePOWER Track — Tunisia — Photo 1" aria-label="Photo 1"><img src="images/achievements/a3-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="First Prize, WePOWER Track — Tunisia — Photo 2" aria-label="Photo 2"><img src="images/achievements/a3-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="First Prize, WePOWER Track — Tunisia — Photo 3" aria-label="Photo 3"><img src="images/achievements/a3-4.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="3" data-cap="First Prize, WePOWER Track — Tunisia — Photo 4" aria-label="Photo 4"><img src="images/achievements/a3-5.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Sep 2024 · IEEE YESIST12</span>
@@ -1096,7 +1150,7 @@
       </article>
 
       <article class="card ach reveal" style="transition-delay:.16s" data-photos="images/achievements/a1-2.jpg|images/achievements/a1-3.jpg|images/achievements/a1-4.jpg">
-        <div class="ach-cover"><span class="ach-award">Certificate of Excellence</span><img src="images/achievements/a1-2.jpg" alt="EIE team receiving award at the Mitsubishi Electric FA ATC meet" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
+        <div class="ach-cover"><span class="ach-award">Certificate of Excellence</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a1-2.jpg" alt="EIE team receiving award at the Mitsubishi Electric FA ATC meet" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Outstanding Project Demo at the 3rd FA ATC Meet — Photo 1" aria-label="Photo 1"><img src="images/achievements/a1-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Outstanding Project Demo at the 3rd FA ATC Meet — Photo 2" aria-label="Photo 2"><img src="images/achievements/a1-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Outstanding Project Demo at the 3rd FA ATC Meet — Photo 3" aria-label="Photo 3"><img src="images/achievements/a1-4.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Feb 2024 · ATC Meet</span>
@@ -1106,7 +1160,7 @@
       </article>
 
       <article class="card ach reveal" data-photos="images/achievements/a4-2.jpg|images/achievements/a4-3.jpg">
-        <div class="ach-cover"><span class="ach-award">Special Mention</span><img src="images/achievements/a4-2.jpg" alt="Special mention award at IEEE YESIST12 2023, Egypt" loading="lazy" decoding="async" /><span class="ach-count">2 photos</span></div>
+        <div class="ach-cover"><span class="ach-award">Special Mention</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a4-2.jpg" alt="Special mention award at IEEE YESIST12 2023, Egypt" loading="lazy" decoding="async" /><span class="ach-count">2 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Special Mention Award, WePOWER Track — Egypt — Photo 1" aria-label="Photo 1"><img src="images/achievements/a4-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Special Mention Award, WePOWER Track — Egypt — Photo 2" aria-label="Photo 2"><img src="images/achievements/a4-3.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Sep 2023 · IEEE YESIST12</span>
@@ -1118,7 +1172,7 @@
       </article>
 
       <article class="card ach reveal" style="transition-delay:.08s" data-photos="images/achievements/a5-2.jpg|images/achievements/a5-3.jpg|images/achievements/a5-4.jpg">
-        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><img src="images/achievements/a5-2.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 5" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
+        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a5-2.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 5" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Bronze Trophy at Mitsubishi Electric Cup 5 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a5-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Bronze Trophy at Mitsubishi Electric Cup 5 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a5-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="2" data-cap="Bronze Trophy at Mitsubishi Electric Cup 5 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a5-4.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Feb 2020 · ME Cup 5</span>
@@ -1130,7 +1184,7 @@
       </article>
 
       <article class="card ach reveal" style="transition-delay:.16s" data-photos="images/achievements/a6-2.jpg|images/achievements/a6-3.jpg|images/achievements/a6-4.jpg">
-        <div class="ach-cover"><span class="ach-award">4th Appreciation · ₹10,000</span><img src="images/achievements/a6-2.jpg" alt="CVR team on stage at Mitsubishi Electric Cup 4" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
+        <div class="ach-cover"><span class="ach-award">4th Appreciation · ₹10,000</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a6-2.jpg" alt="CVR team on stage at Mitsubishi Electric Cup 4" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="4th Appreciation Award at Mitsubishi Electric Cup 4 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a6-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="4th Appreciation Award at Mitsubishi Electric Cup 4 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a6-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="4th Appreciation Award at Mitsubishi Electric Cup 4 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a6-4.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Feb 2019 · ME Cup 4</span>
@@ -1142,7 +1196,7 @@
       </article>
 
       <article class="card ach reveal" data-photos="images/achievements/a7-2.jpg|images/achievements/a7-3.jpg|images/achievements/a7-4.jpg">
-        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><img src="images/achievements/a7-2.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 3" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
+        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a7-2.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 3" loading="lazy" decoding="async" /><span class="ach-count">3 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Bronze Trophy at Mitsubishi Electric Cup 3 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a7-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Bronze Trophy at Mitsubishi Electric Cup 3 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a7-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Bronze Trophy at Mitsubishi Electric Cup 3 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a7-4.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Feb 2018 · ME Cup 3</span>
@@ -1154,7 +1208,7 @@
       </article>
 
       <article class="card ach reveal" style="transition-delay:.08s" data-photos="images/achievements/a8-2.jpg|images/achievements/a8-3.jpg|images/achievements/a8-4.jpg|images/achievements/a8-5.jpg">
-        <div class="ach-cover"><span class="ach-award">Appreciation · ₹10,000</span><img src="images/achievements/a8-3.jpg" alt="Robotic system built for Mitsubishi Electric Cup 2" loading="lazy" decoding="async" /><span class="ach-count">4 photos</span></div>
+        <div class="ach-cover"><span class="ach-award">Appreciation · ₹10,000</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a8-3.jpg" alt="Robotic system built for Mitsubishi Electric Cup 2" loading="lazy" decoding="async" /><span class="ach-count">4 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Appreciation Award at Mitsubishi Electric Cup 2 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a8-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Appreciation Award at Mitsubishi Electric Cup 2 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a8-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Appreciation Award at Mitsubishi Electric Cup 2 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a8-4.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="3" data-cap="Appreciation Award at Mitsubishi Electric Cup 2 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a8-5.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Feb 2017 · ME Cup 2</span>
@@ -1166,7 +1220,7 @@
       </article>
 
       <article class="card ach reveal" style="transition-delay:.16s" data-photos="images/achievements/a9-2.jpg|images/achievements/a9-3.jpg|images/achievements/a9-4.jpg|images/achievements/a9-5.jpg|images/achievements/a9-6.jpg">
-        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><img src="images/achievements/a9-3.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 1" loading="lazy" decoding="async" /><span class="ach-count">5 photos</span></div>
+        <div class="ach-cover"><span class="ach-award bronze">Bronze · ₹50,000</span><span class="cvr-seal" title="CVR College of Engineering"><img src="images/atc/cvr-logo-t.png" alt="" loading="lazy" decoding="async" /></span><img src="images/achievements/a9-3.jpg" alt="CVR team with the bronze trophy at Mitsubishi Electric Cup 1" loading="lazy" decoding="async" /><span class="ach-count">5 photos</span></div>
         <div class="ach-thumbs"><button type="button" class="ach-thumb" data-i="0" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Photo 1" aria-label="Photo 1"><img src="images/achievements/a9-2.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="1" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Photo 2" aria-label="Photo 2"><img src="images/achievements/a9-3.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb" data-i="2" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Photo 3" aria-label="Photo 3"><img src="images/achievements/a9-4.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="3" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a9-5.jpg" alt="" loading="lazy" decoding="async" /></button><button type="button" class="ach-thumb letter" data-i="4" data-cap="Bronze Trophy at Mitsubishi Electric Cup 1 — Shortlist letter from Mitsubishi Electric" aria-label="Shortlist letter from Mitsubishi Electric"><img src="images/achievements/a9-6.jpg" alt="" loading="lazy" decoding="async" /></button></div>
         <div class="ach-body">
           <span class="ach-when">Feb 2016 · ME Cup 1</span>
@@ -1307,8 +1361,10 @@
 <footer>
   <div class="container footer-inner">
     <div>
+      <div class="foot-brand"><span class="cvr-seal"><img src="images/atc/cvr-logo-t.png" alt="CVR College of Engineering logo" loading="lazy" decoding="async" /></span><div>
       <b style="color:var(--ink)">AutomationX Innovation Challenge 2027</b><br/>
       Organised by Mitsubishi Electric India · Coordinating Partner: CVR College of Engineering
+    </div></div>
     </div>
     <div style="display:flex;gap:20px;flex-wrap:wrap">
       <a href="https://mitsubishielectric.in/fa/mecup/" target="_blank" rel="noopener">Official Site</a>
