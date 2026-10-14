@@ -1007,6 +1007,16 @@
 </button>
 
 <script>
+(() => {
+  const url = new URL(location.href);
+  if (url.searchParams.has('hero')) {
+    url.searchParams.delete('hero');
+    history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+  }
+})();
+</script>
+
+<script>
 /* ---------- Theme: system (default) / light / dark ---------- */
 (() => {
   const root = document.documentElement, btn = document.getElementById('themeBtn'), label = btn.querySelector('.theme-label');
@@ -1183,11 +1193,11 @@
   const cv = document.getElementById('circuit'), ctx = cv.getContext('2d');
   let W, H, pts = [], mouse = { x: -999, y: -999 };
   function resize() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const dpr = Math.min(devicePixelRatio || 1, 1.5);
     W = cv.width = innerWidth * dpr; H = cv.height = innerHeight * dpr;
     cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.min(90, Math.floor(innerWidth * innerHeight / 16000));
+    const n = Math.min(64, Math.floor(innerWidth * innerHeight / 22000));
     pts = Array.from({ length: n }, () => ({
       x: Math.random() * innerWidth, y: Math.random() * innerHeight,
       vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35,
@@ -1236,7 +1246,7 @@
   const stage = document.getElementById('v4Stage'), cv = document.getElementById('morph'), ctx = cv.getContext('2d');
   const word = document.getElementById('morphWord'), chips = [...document.querySelectorAll('#shapeChips button')];
   const words = ['factories', 'machines', 'robots', 'plants', 'futures'];
-  const COUNT = innerWidth < 600 ? 900 : 1500;
+  const COUNT = innerWidth < 600 ? 420 : 700;
   let S = 0, shapes = [], parts = [], shapeIdx = 0, running = false, lastUser = 0, cycle = null;
   const mouse = { x: -1e4, y: -1e4 };
   const drawers = [
@@ -1283,7 +1293,7 @@
     return pts;
   }
   function build() {
-    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const dpr = Math.min(devicePixelRatio || 1, 1.5);
     S = Math.round(stage.clientWidth);
     if (!S) return;
     cv.width = cv.height = S * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1321,13 +1331,13 @@
       ctx.fillStyle = `rgb(${C1[0] + (C2[0] - C1[0]) * t | 0},${C1[1] + (C2[1] - C1[1]) * t | 0},${C1[2] + (C2[2] - C1[2]) * t | 0})`;
       ctx.fillRect(p.x, p.y, p.s, p.s);
     }
-    requestAnimationFrame(frame);
+    if (!reduce) requestAnimationFrame(frame);
   }
   function startV4() {
     if (running) return;
     build(); running = true; frame();
     clearInterval(cycle);
-    cycle = setInterval(() => { if (Date.now() - lastUser > 8000) setShape(shapeIdx + 1); }, 4500);
+    if (!reduce) cycle = setInterval(() => { if (Date.now() - lastUser > 8000) setShape(shapeIdx + 1); }, 4500);
   }
   function stopV4() { running = false; clearInterval(cycle); }
   let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (running) build(); }, 200); });
