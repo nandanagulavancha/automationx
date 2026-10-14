@@ -285,10 +285,9 @@
   @keyframes scrolly { 0% { opacity: 0; transform: translateY(0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(14px); } }
 
 
-  /* =====================================================================
-     HERO VARIANTS (under review: 1 · Orbit Core, 2 · Particle Morph)
-     ===================================================================== */
-  .hero[hidden] { display: none !important; }
+    /* =====================================================================
+      HERO · PARTICLE MORPH
+      ===================================================================== */
   .hero .hv-title {
     font-family: 'Outfit', sans-serif; font-weight: 800; color: var(--ink);
     white-space: normal; letter-spacing: -2px; line-height: 1;
@@ -297,24 +296,6 @@
     font-style: normal; background: linear-gradient(90deg, var(--red), var(--violet));
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
-
-  /* ---------- Switcher ---------- */
-  .hero-switch {
-    position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 95;
-    display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 999px;
-    background: rgba(20,23,46,.92); color: #fff; backdrop-filter: blur(10px);
-    box-shadow: 0 14px 34px -12px rgba(20,23,46,.6); font-size: 13px;
-    animation: hsIn .6s 1.2s cubic-bezier(.2,.8,.2,1) both;
-  }
-  @keyframes hsIn { from { opacity: 0; transform: translate(-50%, 20px); } }
-  .hero-switch button {
-    width: 34px; height: 34px; border-radius: 50%; border: 0; cursor: pointer; color: #fff;
-    background: rgba(255,255,255,.1); font-size: 18px; line-height: 1; transition: background .25s;
-  }
-  .hero-switch button:hover { background: var(--red); }
-  .hs-info { display: flex; flex-direction: column; align-items: center; min-width: 132px; padding: 0 8px; line-height: 1.2; }
-  .hs-num { font-size: 10px; letter-spacing: 2px; color: #9aa0c3; font-weight: 700; }
-  .hs-name { font-weight: 700; white-space: nowrap; }
 
   /* ---------- V4 · Particle Morph ---------- */
   .v4-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; width: 100%; }
@@ -340,10 +321,6 @@
   @media (max-width: 980px) {
     .v4-grid { grid-template-columns: 1fr; }
     .v4-stage { max-width: 420px; order: -1; }
-  }
-  @media (max-width: 760px) {
-    .hs-info { min-width: 112px; }
-    .hs-name { font-size: 12px; }
   }
   @media (max-width: 420px) {
     .shape-chips button { padding: 7px 11px; font-size: 12px; }
@@ -565,8 +542,6 @@
   #toTop.show { opacity: 1; transform: none; }
   nav { padding-top: calc(18px + env(safe-area-inset-top, 0px)); }
   nav.scrolled { padding-top: calc(10px + env(safe-area-inset-top, 0px)); }
-  .hero-switch { bottom: calc(22px + env(safe-area-inset-bottom, 0px)); }
-
   /* Scroll progress */
   #progress { position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 200; background: linear-gradient(90deg, var(--red), var(--violet), var(--cyan)); }
 
@@ -730,58 +705,8 @@
 
 <!-- ================= HERO ================= -->
 <div id="home">
-<!-- ================= HERO 1 · ORBIT CORE ================= -->
-<header class="hero hero-v1" data-v="1" data-name="Orbit Core">
-  <div class="container hero-grid">
-    <div>
-      <span class="eyebrow"><span class="pulse-dot"></span> Registrations Open · Free Entry</span>
-      <p class="sub-brand" style="margin-top:26px">Mitsubishi Electric India</p>
-      <h1>
-        <span class="split-line"><span style="animation-delay:.9s">AUTOMATION</span></span><span class="split-line"><span class="x" style="animation:rise .9s 1.1s cubic-bezier(.2,.8,.2,1) forwards, xpulse 3s 2s ease-in-out infinite">X</span></span>
-      </h1>
-      <span class="tag-year reveal">INNOVATION CHALLENGE 2027</span>
-      <p class="tagline reveal">Advancing Smart Factories<br/>Through <span class="typed" id="typed">Digital Minds</span><span class="caret"></span></p>
-      <div class="hero-cta reveal">
-        <a href="https://mitsubishielectric.in/fa/mecup/registration-form.php" target="_blank" rel="noopener" class="btn btn-primary">
-          Register Now
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#about" class="btn btn-ghost">Explore Challenge</a>
-      </div>
-      <div class="hero-meta reveal">
-        <div>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-          Finals · 4–6 March 2027
-        </div>
-        <div>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
-          CVR College of Engineering, Hyderabad
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-visual reveal zoom">
-      <div class="core-wrap">
-        <div class="ring"><span class="node"></span></div>
-        <div class="ring r2"><span class="node"></span></div>
-        <div class="ring r3"></div>
-        <div class="core">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-          </svg>
-        </div>
-        <div class="chip c1"><i></i> Industrial IoT</div>
-        <div class="chip c2"><i></i> AI · Analytics</div>
-        <div class="chip c3"><i></i> PLC · Robotics</div>
-      </div>
-    </div>
-  </div>
-  <a href="#about" class="scroll-hint" aria-label="Scroll down"></a>
-</header>
-
 <!-- ================= HERO 2 · PARTICLE MORPH ================= -->
-<header class="hero hero-v4" data-v="2" data-name="Particle Morph" hidden>
+<header class="hero hero-v4" data-v="2" data-name="Particle Morph">
   <div class="container v4-grid">
     <div>
       <span class="eyebrow"><span class="pulse-dot"></span> Mitsubishi Electric India · AutomationX 2027</span>
@@ -1077,12 +1002,6 @@
   </div>
 </footer>
 
-<div class="hero-switch" role="group" aria-label="Choose a hero design">
-  <button class="hs-prev" aria-label="Previous hero design">‹</button>
-  <div class="hs-info"><span class="hs-num">HERO 1 / 2</span><span class="hs-name">Orbit Core</span></div>
-  <button class="hs-next" aria-label="Next hero design">›</button>
-</div>
-
 <button id="toTop" aria-label="Back to top">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
 </button>
@@ -1312,28 +1231,6 @@
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const heroes = [...document.querySelectorAll('.hero[data-v]')].sort((a, b) => a.dataset.v - b.dataset.v);
-  const N = heroes.length;
-  const hsNum = document.querySelector('.hs-num'), hsName = document.querySelector('.hs-name');
-  let cur = 1;
-  
-  function show(n, scroll) {
-    cur = ((n - 1) % N + N) % N + 1;
-    heroes.forEach(h => { h.hidden = +h.dataset.v !== cur; });
-    const h = heroes[cur - 1];
-    hsNum.textContent = `HERO ${cur} / ${N}`;
-    hsName.textContent = h.dataset.name;
-    h.querySelectorAll('.reveal').forEach(e => e.classList.add('in'));
-    try { localStorage.setItem('axHero', cur); } catch (e) {}
-    try { const u = new URL(location.href); u.searchParams.set('hero', cur); history.replaceState(null, '', u); } catch (e) {}
-    if (scroll) scrollTo({ top: 0, behavior: 'instant' });
-    document.dispatchEvent(new CustomEvent('herochange', { detail: cur }));
-  }
-  document.querySelector('.hs-prev').onclick = () => show(cur - 1, true);
-  document.querySelector('.hs-next').onclick = () => show(cur + 1, true);
-  let start = 1;
-  try { const m = location.hash.match(/^#hero(\d)$/); start = (m && +m[1]) || +new URL(location.href).searchParams.get('hero') || +localStorage.getItem('axHero') || 1; } catch (e) {}
-  show(start, false);
 
   /* ---------- V4: particle morph ---------- */
   const stage = document.getElementById('v4Stage'), cv = document.getElementById('morph'), ctx = cv.getContext('2d');
@@ -1435,12 +1332,7 @@
   function stopV4() { running = false; clearInterval(cycle); }
   let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => { if (running) build(); }, 200); });
 
-  /* ---------- lifecycle ---------- */
-  function onHero(v) {
-    heroes[v - 1].classList.contains('hero-v4') ? startV4() : stopV4();
-  }
-  document.addEventListener('herochange', e => onHero(e.detail));
-  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(() => onHero(cur));
+  (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()).then(startV4);
 })();
 </script>
 
